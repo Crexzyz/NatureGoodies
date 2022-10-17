@@ -1,0 +1,49 @@
+plugins {
+	id 'fabric-loom' version "${fabric_loom_version}"
+	id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = "${mod_name}-fabric-${minecraft_version}"
+
+dependencies {
+    // Actual versions in the gradle.properties file
+	minecraft "com.mojang:minecraft:${minecraft_version}"
+	mappings loom.officialMojangMappings()
+	modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    implementation project(":common")
+}
+
+processResources {
+    from project(":common").sourceSets.main.resources
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+    source(project(":common").sourceSets.main.allSource)
+}
+
+archivesBaseName = "${mod_name}-fabric-${minecraft_version}"
+
+// TODO: Maven publication
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
+            from components.java
+		}
+	}
+
+	repositories {
+	    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+	}
+}
