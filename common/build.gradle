@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    // VanillaGradle contains Mojang's offical mappings
     id 'org.spongepowered.gradle.vanilla' version "${vanilla_gradle_version}"
     id 'maven-publish'
 }
@@ -9,7 +8,6 @@ archivesBaseName = "${mod_name}-common-${minecraft_version}"
 
 minecraft {
     version(minecraft_version)
-
     runs {   
         if (project.hasProperty('common_runs_enabled') ? project.findProperty('common_runs_enabled').toBoolean() : true) {
         
@@ -24,13 +22,16 @@ minecraft {
 }
 
 dependencies {
-    compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'
+     compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'
+     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
 }
 
 processResources {
+
     def buildProps = project.properties.clone()
 
     filesMatching(['pack.mcmeta']) {
+
         expand buildProps
     }
 }
