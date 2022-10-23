@@ -2,9 +2,14 @@ package crexzyzdev.ng;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.core.Registry;
+import net.minecraft.world.item.CreativeModeTab;
 
 public class ExampleMod implements ModInitializer {
-    
+
+    public static final MyItem MY_ITEM = new MyItem(new FabricItemSettings().group(CreativeModeTab.TAB_MISC));
+
     @Override
     public void onInitialize() {
         
@@ -19,5 +24,7 @@ public class ExampleMod implements ModInitializer {
         // Some code like events require special initialization from the
         // loader specific code.
         ItemTooltipCallback.EVENT.register(CommonClass::onItemTooltip);
+
+        Registry.register(Registry.ITEM, "nature-goodies:my_item", MY_ITEM);
     }
 }

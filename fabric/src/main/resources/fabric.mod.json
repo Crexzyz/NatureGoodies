@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "id": "nature-goodies",
-    "version": "${version}",
+    "version": "1.19.2",
   
     "name": "Nature Goodies",
     "description": "Description pending",
@@ -14,7 +14,7 @@
     },
   
     "license": "GPL-3.0",
-    "icon": "assets/modid/icon.png",
+    "icon": "assets/nature-goodies/icon.png",
   
     "environment": "*",
     "entrypoints": {
