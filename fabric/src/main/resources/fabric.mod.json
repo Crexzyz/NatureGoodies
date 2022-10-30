@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "nature-goodies",
+    "id": "nature_goodies",
     "version": "1.19.2",
   
     "name": "Nature Goodies",
@@ -14,16 +14,16 @@
     },
   
     "license": "GPL-3.0",
-    "icon": "assets/nature-goodies/icon.png",
+    "icon": "assets/nature_goodies/icon.png",
   
     "environment": "*",
     "entrypoints": {
       "main": [
-        "crexzyzdev.ng.ExampleMod"
+        "crexzyzdev.ng.NGFabric"
       ]
     },
     "mixins": [
-      "nature-goodies.mixins.json"
+      "nature_goodies.mixins.json"
     ],
   
     "depends": {

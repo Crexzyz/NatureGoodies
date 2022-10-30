@@ -1,14 +1,24 @@
 package crexzyzdev.ng;
 
+import crexzyzdev.ng.items.MarijuanaSeeds;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
-public class ExampleMod implements ModInitializer {
+public class NGFabric implements ModInitializer {
 
-    public static final MyItem MY_ITEM = new MyItem(new FabricItemSettings().group(CreativeModeTab.TAB_MISC));
+    public static final CreativeModeTab MOD_TAB = FabricItemGroupBuilder
+            .create(new ResourceLocation(Constants.MOD_ID, "main"))
+            .icon(() -> new ItemStack(Items.TALL_GRASS))
+            .build();
+
+    public static final MarijuanaSeeds MARIJUANA_SEEDS = new MarijuanaSeeds(new FabricItemSettings().group(MOD_TAB));
 
     @Override
     public void onInitialize() {
@@ -25,6 +35,6 @@ public class ExampleMod implements ModInitializer {
         // loader specific code.
         ItemTooltipCallback.EVENT.register(CommonClass::onItemTooltip);
 
-        Registry.register(Registry.ITEM, "nature-goodies:my_item", MY_ITEM);
+        Registry.register(Registry.ITEM, new ResourceLocation(Constants.MOD_ID, MarijuanaSeeds.NAME), MARIJUANA_SEEDS);
     }
 }
