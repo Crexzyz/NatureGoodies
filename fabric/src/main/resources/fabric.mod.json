@@ -20,6 +20,9 @@
     "entrypoints": {
       "main": [
         "crexzyzdev.ng.NGFabric"
+      ],
+      "client": [
+        "crexzyzdev.ng.NGFabricClient"
       ]
     },
     "mixins": [
