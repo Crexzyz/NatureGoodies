@@ -10,6 +10,6 @@ import net.minecraft.client.renderer.RenderType;
 public class NGFabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlock(NGFabric.MARIJUANA_CROP_BLOCK, RenderType.cutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(NGFabric.GREENIE_CROP_BLOCK, RenderType.cutoutMipped());
     }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "nature_goodies:block/greenie_crop_block_stage0"
+  }
+}
