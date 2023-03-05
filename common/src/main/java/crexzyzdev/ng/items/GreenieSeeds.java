@@ -12,8 +12,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
 public class GreenieSeeds extends ItemNameBlockItem {
+    public static final String NAME = "greenie_seeds";
 
-    public static final ResourceLocation RESOURCE_LOCATION = new ResourceLocation(Constants.MOD_ID, "greenie_seeds");
+    public static final ResourceLocation RESOURCE_LOCATION = new ResourceLocation(Constants.MOD_ID, NAME);
 
     public GreenieSeeds(Block aliasedBlock, Properties properties) {
         super(aliasedBlock, properties);

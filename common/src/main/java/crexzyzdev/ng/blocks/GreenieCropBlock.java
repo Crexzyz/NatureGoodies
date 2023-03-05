@@ -24,7 +24,9 @@ public class GreenieCropBlock extends CropBlock {
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D)      
     };
 
-    public static final ResourceLocation RESOURCE_LOCATION = new ResourceLocation(Constants.MOD_ID, "greenie_crop_block");
+    public static final String NAME = "greenie_crop_block";
+
+    public static final ResourceLocation RESOURCE_LOCATION = new ResourceLocation(Constants.MOD_ID, NAME);
 
     public GreenieCropBlock(Properties properties) {
         super(properties);

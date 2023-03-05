@@ -12,5 +12,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'MultiLoader'
+rootProject.name = 'NatureGoodies'
 include("common", "fabric", "forge")
