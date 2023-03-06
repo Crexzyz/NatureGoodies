@@ -4,6 +4,7 @@ import crexzyzdev.ng.blocks.GreenieCropBlock;
 import crexzyzdev.ng.items.GreenieSeeds;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,14 +26,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 @Mod(Constants.MOD_ID)
-public class ExampleMod {
-    public static final CreativeModeTab MOD_TAB = new CreativeModeTab("ng") {
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(Items.TALL_GRASS);
-        }
-    };
-
+public class NGForge {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MOD_ID);
 
@@ -45,7 +40,7 @@ public class ExampleMod {
 
     public static final RegistryObject<Item> GREENIE_SEEDS = ITEMS.register(
         GreenieSeeds.NAME,
-        () -> new GreenieSeeds(GREENIE_CROP_BLOCK.get(), new Item.Properties().tab(MOD_TAB))
+        () -> new GreenieSeeds(GREENIE_CROP_BLOCK.get(), new Item.Properties())
     );
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
@@ -57,10 +52,10 @@ public class ExampleMod {
     private static <T extends Block> RegistryObject<Item> registerBlockItem(
             String name, RegistryObject<T> block, CreativeModeTab tab
     ) {
-        return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
+        return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
-    public ExampleMod() {
+    public NGForge() {
     
         // This method is invoked by the Forge mod loader when it is ready
         // to load your mod. You can access Forge and Common code in this
@@ -93,6 +88,17 @@ public class ExampleMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             ItemBlockRenderTypes.setRenderLayer(GREENIE_CROP_BLOCK.get(), RenderType.cutoutMipped());
+        }
+
+        @SubscribeEvent
+        public static void onCreativeTabRegistry(CreativeModeTabEvent.Register event) {
+            event.registerCreativeModeTab(new ResourceLocation(Constants.MOD_ID, "main"), builder -> {
+                builder
+                    .icon(() -> new ItemStack(Items.TALL_GRASS))
+                    .displayItems((enabledFlags, populator, hasPermissions) -> {
+                        populator.accept(new ItemStack(GREENIE_SEEDS.get()));
+                    });
+            });
         }
     }
 }
